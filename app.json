@@ -1,9 +1,9 @@
 {
-    "name": "x-asena",
-    "description": "X-asena Multi Device whatsappbot",
+    "name": "Toxic-Alexa_V4",
+    "description": "Toxic Alexa V4 Multi Device whatsappbot",
     "logo": "https://i.hizliresim.com/6Bbj7i.jpg",
     "keywords": ["whatsapp"],
-    "repository": "https://github.com/Neeraj-x0/x-asena",
-    "website":   "https://github.com/Neeraj-x0/x-asena",
-    "success_url": "https://github.com/Neeraj-x0/x-asena",
+    "repository": "https://github.com/TOXICTURBO/Toxic-Alexa-Asena-Md",
+    "website":   "https://github.com/TOXICTURBO/Toxic-Alexa-Asena-Md",
+    "success_url": "https://github.com/TOXICTURBO/Toxic-Alexa-Asena-Md",
     "stack": "container" }
