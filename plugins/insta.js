@@ -23,7 +23,7 @@ var fail = "*_Download failed! Check your link and try again_*";
 var need_acc_s = "_Need an instagram username or link!_";
 command({
     pattern: 'insta ?(.*)',
-    fromMe: flase,
+    fromMe: true,
     desc: 'Instagram post downloader',
     usage: 'insta link or reply to a link',
     use: 'download'
