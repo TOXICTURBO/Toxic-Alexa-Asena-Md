@@ -40,7 +40,7 @@ async function whatsAsena() {
   conn.ev.on("connection.update", async (s) => {
     const { connection, lastDisconnect } = s;
     if (connection === "connecting") {
-      console.log("X-Asena");
+      console.log("Toxic Alexa V4");
       console.log("ℹ️ Connecting to WhatsApp... Please Wait.");
     }
 
