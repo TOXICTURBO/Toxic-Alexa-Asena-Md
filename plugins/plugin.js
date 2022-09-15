@@ -1,3 +1,12 @@
+/*Codded by @TURBOHYPER
+Whatsapp: wa.me/+916380260672 
+Instagram: toxic_turbo777
+Thanks:
+*İdea by @TURBOHYPER
+copy with credits
+*/
+
+
 const { command,getJson } = require("../lib/");
 const { installPlugin } = require("../lib/database/plugins");
 
