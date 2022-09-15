@@ -35,6 +35,6 @@ command(
       menu += `\n┠${(num += 1)} \`\`\`${cmd}\`\`\` \n╿`;
     });
     menu += `\n╰╾╼╾╼╾╼╾╼╾╼╾╼╾╼╾╼╾╼╾╼╾╼╾╼╾╼╾╼`
-    message.sendMessage(readFileSync("./TurboMedia/alexa.jpeg"), {caption:menu},'image');
+    message.sendMessage(readFileSync("./TurboMedia/alexa.jpg"), {caption:menu},'image');
   }
 );
