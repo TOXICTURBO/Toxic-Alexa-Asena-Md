@@ -1,0 +1,9 @@
+{
+    "name": "x-asena",
+    "description": "X-asena Multi Device whatsappbot",
+    "logo": "https://i.hizliresim.com/6Bbj7i.jpg",
+    "keywords": ["whatsapp"],
+    "repository": "https://github.com/Neeraj-x0/x-asena",
+    "website":   "https://github.com/Neeraj-x0/x-asena",
+    "success_url": "https://github.com/Neeraj-x0/x-asena",
+    "stack": "container" }
