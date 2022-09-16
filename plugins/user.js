@@ -23,8 +23,6 @@ await message.reply('_Successfully Profile Picture Updated_')
 
 command({pattern: 'gpp ?(.*)', fromMe: true, desc: 'set group icon in any resolution', type: 'group'}, async (message, match, m) => {
 if (!message.isGroup) return await message.send('_This command only works in group chats_')
-const isbotAdmin = await isBotAdmins(m)
-if (!isBotAdmins) return await message.reply("I'm not an admin")
 if (!message.reply_message.image)
       return await message.reply("_Reply to a photo_");
 const media = await message.reply_message.downloadAndSaveMedia()
