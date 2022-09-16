@@ -17,7 +17,7 @@ command({pattern: 'fullpp ?(.*)', fromMe: true, desc: 'set profile picture in an
 if (!message.reply_message.image)
       return await message.reply("_Reply to a photo_");
 const media = await m.quoted.download();
-await message.updateProfilePicture(message.user_id, media)
+await message.setPP(message.user_id, media)
 await message.reply('_Successfully Profile Picture Updated_')
 });
 
