@@ -25,7 +25,7 @@ command({pattern: 'gpp ?(.*)', fromMe: true, desc: 'set group icon in any resolu
 if (!message.isGroup) return await message.send('_This command only works in group chats_')
 if (!message.reply_message.image)
       return await message.reply("_Reply to a photo_");
-const media = await message.reply_message.downloadAndSaveMedia()
+const media = await m.quoted.download();
 await message.setPP(message.jid, media)
 await message.send('_Successfully Group icon Updated_')
 });
