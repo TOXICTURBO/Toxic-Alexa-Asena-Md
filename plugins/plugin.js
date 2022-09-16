@@ -40,7 +40,7 @@ command(
     } else {
         plugin_name = "__" + Math.random().toString(36).substring(8);
     }
-    writeFileSync('./plugins/' + plugin_name + '.js', data);
+    fs.writeFileSync('./plugins/' + plugin_name + '.js', data);
     try {
       require('./' + plugin_name)
   } catch (e) {
