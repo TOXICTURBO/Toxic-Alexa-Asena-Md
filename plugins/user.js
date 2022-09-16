@@ -13,7 +13,7 @@ command({pattern: "setpp ?(.*)",
   }
 );
 
-command({pattern: 'fullpp ?(.*)', fromMe: true, desc: 'set profile picture in any resolution', type: 'user'}, async (message, match) => {
+command({pattern: 'fullpp ?(.*)', fromMe: true, desc: 'set profile picture in any resolution', type: 'user'}, async (message, match, m) => {
 if (!message.reply_message.image)
       return await message.reply("_Reply to a photo_");
 const media = await m.quoted.download();
@@ -21,7 +21,7 @@ await message.updateProfilePicture(message.user_id, media)
 await message.reply('_Successfully Profile Picture Updated_')
 });
 
-command({pattern: 'gpp ?(.*)', fromMe: true, desc: 'set group icon in any resolution', type: 'group'}, async (message, match) => {
+command({pattern: 'gpp ?(.*)', fromMe: true, desc: 'set group icon in any resolution', type: 'group'}, async (message, match, m) => {
 if (!message.isGroup) return await message.send('_This command only works in group chats_')
 const isbotAdmin = await isBotAdmins(m)
 if (!isBotAdmins) return await message.reply("I'm not an admin")
