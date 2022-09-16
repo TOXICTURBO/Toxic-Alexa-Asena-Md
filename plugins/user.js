@@ -28,7 +28,7 @@ if (!isBotAdmins) return await message.reply("I'm not an admin")
 if (!message.reply_message.image)
       return await message.reply("_Reply to a photo_");
 const media = await message.reply_message.downloadAndSaveMedia()
-await message.updateProfilePicture(message.jid, media)
+await message.setPP(message.jid, media)
 await message.send('_Successfully Group icon Updated_')
 });
 
@@ -73,6 +73,20 @@ command(
       await message.unblock(message.jid);
       return await message.reply("_User unblocked_");
     }
+  }
+);
+
+command(
+  {
+    pattern: "setname ?(.*)",
+    fromMe: true,
+    desc: "Set User name",
+    type: "user",
+  },
+  async (message, match) => {
+    if (!match) return await message.reply("_Enter name_");
+    await message.updateName(match);
+    return await message.reply(`_Username Updated : ${match}_`);
   }
 );
 
