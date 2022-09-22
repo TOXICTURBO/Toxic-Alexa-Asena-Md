@@ -1,3 +1,2 @@
-const { downloadMediaMessage } = require("@adiwajshing/baileys");
-
-downloadMediaMessage
+const {search}  = require("yt-search")
+search('mooonlight song').then(({videos})=>{console.log(videos)})

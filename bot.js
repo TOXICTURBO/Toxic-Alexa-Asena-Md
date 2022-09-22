@@ -1,10 +1,3 @@
-/* Copyright (C) 2020 Yusuf Usta.
-
-Licensed under the  GPL-3.0 License;
-you may not use this file except in compliance with the License.
-
-WhatsAsena - Yusuf Usta
-*/
 const {
   default: makeWASocket,
   useSingleFileAuthState,
@@ -21,11 +14,11 @@ const config = require("./config");
 
 const { PluginDB } = require("./lib/database/plugins");
 const Greetings = require("./lib/Greetings");
-async function whatsAsena() {
+async function Turbo() {
   console.log("Syncing Database");
   await config.DATABASE.sync();
   const { state, saveState } = useSingleFileAuthState(
-    "./session.json",
+    "./media/session.json",
     pino({ level: "silent" })
   );
   let conn = makeWASocket({
@@ -40,7 +33,7 @@ async function whatsAsena() {
   conn.ev.on("connection.update", async (s) => {
     const { connection, lastDisconnect } = s;
     if (connection === "connecting") {
-      console.log("Toxic Alexa V4");
+      console.log("Toxic-Alexa_V4");
       console.log("ℹ️ Connecting to WhatsApp... Please Wait.");
     }
 
@@ -51,7 +44,7 @@ async function whatsAsena() {
       lastDisconnect.error.output.statusCode != 401
     ) {
       console.log(lastDisconnect.error.output.payload);
-      whatsAsena();
+      Xasena();
     }
 
     if (connection === "open") {
@@ -129,4 +122,4 @@ async function whatsAsena() {
   });
 }
 
-whatsAsena();
+Turbo();
