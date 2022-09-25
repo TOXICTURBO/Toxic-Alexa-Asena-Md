@@ -49,5 +49,8 @@ module.exports = {
     DATABASE: DATABASE_URL === './lib/whatsasena.db' ? new Sequelize({ dialect: "sqlite", storage: DATABASE_URL, logging: DEBUG }) : new Sequelize(DATABASE_URL, { dialectOptions: { ssl: { require: true, rejectUnauthorized: false } }, logging: DEBUG }),
 
     SUDO: process.env.SUDO === undefined ? '916380260672,234701488921' : process.env.SUDO,
+HEROKU_APP_NAME: process.env.HEROKU_APP_NAME || " ",
+
+  HEROKU_API_KEY: process.env.HEROKU_API_KEY || " ",
 
 };
