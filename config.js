@@ -1,9 +1,9 @@
-/* Copyright (C) 2022 X-Electra.
+/* Copyright (C) 2022 Turbo Mods.
 
 Licensed under the  GPL-3.0 License;
 you may not use this file except in compliance with the License.
 
-X-asena X-Electra
+Toxic Alexa V4 - Turbo Mods
 */
 
 const { Sequelize } = require("sequelize");
