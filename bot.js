@@ -18,7 +18,7 @@ async function Turbo() {
   console.log("Syncing Database");
   await config.DATABASE.sync();
   const { state, saveState } = useSingleFileAuthState(
-    "./media/session.json",
+    "./session.json",
     pino({ level: "silent" })
   );
   let conn = makeWASocket({
@@ -44,7 +44,7 @@ async function Turbo() {
       lastDisconnect.error.output.statusCode != 401
     ) {
       console.log(lastDisconnect.error.output.payload);
-      Xasena();
+      Turbo();
     }
 
     if (connection === "open") {
