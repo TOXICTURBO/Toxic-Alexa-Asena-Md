@@ -1,37 +1,53 @@
+/* Copyright (C) 2020 Yusuf Usta.
 
-const { Sequelize } = require("sequelize");
-const fs = require("fs");
-if (fs.existsSync("config.env"))
-  require("dotenv").config({ path: "./config.env" });
+Licensed under the  GPL-3.0 License;
 
-const toBool = (x) => x == "true";
+you may not use this file except in compliance with the License.
 
-DATABASE_URL = process.env.DATABASE_URL || "./lib/database.db";
+WhatsAsena - Yusuf Usta
+
+*/
+
+const { Sequelize } = require('sequelize');
+
+const fs = require('fs');
+
+if (fs.existsSync('config.env')) require('dotenv').config({ path: './config.env' });
+
+// Özel Fonksiyonlarımız
+
+function convertToBool(text, fault = 'true') {
+
+    return text === fault ? true : false;
+
+}
+
+DATABASE_URL = process.env.DATABASE_URL === undefined ? './lib/whatsasena.db' : process.env.DATABASE_URL;
+
+DEBUG = process.env.DEBUG === undefined ? false : convertToBool(process.env.DEBUG);
 
 module.exports = {
-  ANTILINK: toBool(process.env.ANTI_LINK) || false,
-  ANTILINK_ACTION: "kick",
-  HANDLERS: process.env.HANDLERS || "^[,]",
-  BRANCH: "master",
-  PACKNAME: process.env.PACKNAME || "TurboMods",
-  WELCOME_MSG:
-    process.env.WELCOME_MSG ||
-    "{pp}Hi @user Welcome to @gname\nYou're our @count/513 Members ",
-  GOODBYE_MSG: process.env.GOODBYE_MSG || "Hi @user It was Nice Seeing you",
-  AUTHOR: process.env.AUTHOR || "TurboMods",
-  DATABASE_URL: DATABASE_URL,
-  DATABASE:
-    DATABASE_URL === "./lib/database.db"
-      ? new Sequelize({
-          dialect: "sqlite",
-          storage: DATABASE_URL,
-          logging: false,
-        })
-      : new Sequelize(DATABASE_URL, {
-          dialectOptions: { ssl: { require: true, rejectUnauthorized: false } },
-          logging: false,
-        }),
-  SUDO: process.env.SUDO || "916380260672,2347014889291",
-  HEROKU_APP_NAME: process.env.HEROKU_APP_NAME || " ",
-  HEROKU_API_KEY: process.env.HEROKU_API_KEY || " ",
+
+    ANTILINK: process.env.ANTI_LINK || false,
+
+    ANTILINK_ACTION : 'kick',
+
+    HANDLERS: process.env.HANDLERS === undefined ? '^[.!;]' : process.env.HANDLERS,
+
+    BRANCH: 'master',
+
+    PACKNAME:'Toxic Alexa V4',
+
+    WELCOME_MSG:'{pp}Hi @user Welcome to @gname\nYou\'re our @count/513 Members ',
+
+    GOODBYE_MSG:'Hi @user It was Nice Seeing you',
+
+    AUTHOR:"Turbo Mods",
+
+    DATABASE_URL: DATABASE_URL,
+
+    DATABASE: DATABASE_URL === './lib/whatsasena.db' ? new Sequelize({ dialect: "sqlite", storage: DATABASE_URL, logging: DEBUG }) : new Sequelize(DATABASE_URL, { dialectOptions: { ssl: { require: true, rejectUnauthorized: false } }, logging: DEBUG }),
+
+    SUDO: process.env.SUDO === undefined ? '916380260672,234701488921' : process.env.SUDO,
+
 };
