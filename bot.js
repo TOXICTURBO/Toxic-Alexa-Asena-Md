@@ -14,7 +14,7 @@ const config = require("./config");
 
 const { PluginDB } = require("./lib/database/plugins");
 const Greetings = require("./lib/Greetings");
-async function Turbo() {
+async function whatsAsena() {
   console.log("Syncing Database");
   await config.DATABASE.sync();
   const { state, saveState } = useSingleFileAuthState(
@@ -44,7 +44,7 @@ async function Turbo() {
       lastDisconnect.error.output.statusCode != 401
     ) {
       console.log(lastDisconnect.error.output.payload);
-      Turbo();
+      whatsAsena();
     }
 
     if (connection === "open") {
@@ -122,4 +122,4 @@ async function Turbo() {
   });
 }
 
-Turbo();
+whatsAsena();
