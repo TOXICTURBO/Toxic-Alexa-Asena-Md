@@ -2,7 +2,7 @@ const { command } = require("../lib");
 
 command(
   {
-    pattern: "setpp ?(.*)",
+    pattern: "setpp ",
     fromMe: true,
     desc: "Set profile picture",
     type: "user",
@@ -76,7 +76,7 @@ command(
 
 command(
   {
-    pattern: "jid",
+    pattern: "jid ?(.*)",
     fromMe: true,
     desc: "Give jid of chat/user",
     type: "user",

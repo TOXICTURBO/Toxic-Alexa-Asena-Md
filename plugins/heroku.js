@@ -1,10 +1,11 @@
 const got = require("got");
 const Heroku = require("heroku-client");
-const { secondsToDHMS, command } = require("../lib/");
+const { command,isPrivate } = require("../lib/");
 const Config = require("../config");
 const heroku = new Heroku({ token: Config.HEROKU_API_KEY });
 const baseURI = "/apps/" + Config.HEROKU_APP_NAME;
 const simpleGit = require("simple-git");
+const { secondsToDHMS } = require("../lib/functions");
 const git = simpleGit();
 const exec = require("child_process").exec;
 
@@ -34,7 +35,7 @@ command(
     await heroku
       .get(baseURI + "/formation")
       .then(async (formation) => {
-        await message.sendMessage(`_Shuttind down._`);
+        await message.sendMessage(`_Shutting down._`);
         await heroku.patch(baseURI + "/formation/" + formation[0].id, {
           body: {
             quantity: 0,
@@ -50,7 +51,7 @@ command(
 command(
   {
     pattern: "dyno",
-    fromMe: true,
+    fromMe: isPrivate,
     desc: "Show Quota info",
     type: "heroku",
   },
@@ -86,7 +87,7 @@ Remaning    : ${secondsToDHMS(remaining)}`;
 
 command(
   {
-    pattern: "setvar ?(.*)",
+    pattern: "setvar ",
     fromMe: true,
     desc: "Set heroku env",
     type: "heroku",
@@ -114,7 +115,7 @@ command(
 
 command(
   {
-    pattern: "delvar ?(.*)",
+    pattern: "delvar ",
     fromMe: true,
     desc: "Delete Heroku env",
     type: "heroku",
@@ -143,7 +144,7 @@ command(
 
 command(
   {
-    pattern: "getvar ?(.*)",
+    pattern: "getvar ",
     fromMe: true,
     desc: "Show heroku env",
     type: "heroku",
@@ -192,7 +193,7 @@ command(
 
 command(
   {
-    pattern: "update$",
+    pattern: "update",
     fromMe: true,
     desc: "Checks for update.",
   },
@@ -221,7 +222,7 @@ command(
 
 command(
   {
-    pattern: "update now$",
+    pattern: "update now",
     fromMe: true,
     dontAddCommandList: true,
     desc: "Updates the Bot",
@@ -233,7 +234,7 @@ command(
       return await message.sendMessage("_Already on latest version_");
     } else {
       await message.reply("_Updating_");
-      if (Config.HEROKU.HEROKU) {
+      
         try {
           var app = await heroku.get("/apps/" + Config.HEROKU_APP_NAME);
         } catch {
@@ -257,18 +258,7 @@ command(
         await git.push("heroku", Config.BRANCH);
 
         await message.sendMessage("UPDATED");
-      } else {
-        git.pull(async (err, update) => {
-          if (update && update.summary.changes) {
-            await message.sendMessage("UPDATED");
-            exec("npm install").stderr.pipe(process.stderr);
-          } else if (err) {
-            await message.sendMessage(
-              "*❌ Update failed!*\n*Error:* ```" + err + "```"
-            );
-          }
-        });
-      }
+      
     }
   }
 );

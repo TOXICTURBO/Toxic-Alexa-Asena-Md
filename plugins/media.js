@@ -1,12 +1,13 @@
-const { Function, command, webp2mp4, isUrl } = require("../lib/");
+const { Function, command, webp2mp4, isUrl, isPrivate } = require("../lib/");
 const { yta, ytIdRegex, ytv } = require("../lib/yotube");
 const { search } = require("yt-search");
 const { toAudio } = require("../lib/media");
 let gis = require("g-i-s");
+const { AddMp3Meta } = require("../lib/functions");
 Function(
   {
-    pattern: "img ?(.*)",
-    fromMe: true,
+    pattern: "img ",
+    fromMe: isPrivate,
     desc: "Google Image search",
     type: "download",
   },
@@ -41,8 +42,8 @@ async function gimage(query, amount = 5) {
 
 command(
   {
-    pattern: "vv ?(.*)",
-    fromMe: true,
+    pattern: "vv ",
+    fromMe: isPrivate,
     desc: "Forwards The View once messsage",
     type: "tool",
   },
@@ -56,8 +57,8 @@ command(
 
 command(
   {
-    pattern: "photo ?(.*)",
-    fromMe: true,
+    pattern: "photo ",
+    fromMe: isPrivate,
     desc: "Changes sticker to Photo",
     type: "converter",
   },
@@ -71,8 +72,8 @@ command(
 
 command(
   {
-    pattern: "mp4 ?(.*)",
-    fromMe: true,
+    pattern: "mp4 ",
+    fromMe: isPrivate,
     desc: "Changes sticker to Video",
     type: "converter",
   },
@@ -87,22 +88,37 @@ command(
 
 command(
   {
-    pattern: "song ?(.*)",
-    fromMe: true,
+    pattern: "song ",
+    fromMe: isPrivate,
     desc: "Downloads Song",
     type: "downloader",
   },
   async (message, match) => {
     match = match || message.reply_message.text;
     if (ytIdRegex.test(match)) {
-      yta(match.trim()).then(({ dl_link, title }) => {
-        message.sendFromUrl(dl_link, { filename: title });
+      yta(match.trim()).then(async ({ dl_link, title, thumb }) => {
+        let buff = await AddMp3Meta(dl_link, thumb, {
+          title,
+        });
+        message.sendMessage(
+          buff,
+          { mimetype: "audio/mpeg", quoted: message.data },
+          "audio"
+        );
       });
     }
-    search(match + "song").then(async ({ all }) => {
+    search(match + "song ?(.*)").then(async ({ all }) => {
       await message.reply(`_Downloading ${all[0].title}_`);
-      yta(all[0].url).then(({ dl_link, title }) => {
-        message.sendFromUrl(dl_link, { filename: title, quoted: message });
+      yta(all[0].url).then(async ({ dl_link, title, thumb }) => {
+        let buff = await AddMp3Meta(dl_link, thumb, {
+          title,
+          artist: [all[0].author],
+        });
+        message.sendMessage(
+          buff,
+          { mimetype: "audio/mpeg", quoted: message.data },
+          "audio"
+        );
       });
     });
   }
@@ -110,8 +126,8 @@ command(
 
 command(
   {
-    pattern: "video ?(.*)",
-    fromMe: true,
+    pattern: "video ",
+    fromMe: isPrivate,
     desc: "Downloads video",
     type: "downloader",
   },
@@ -133,8 +149,8 @@ command(
 
 command(
   {
-    pattern: "mp3 ?(.*)",
-    fromMe: true,
+    pattern: "mp3 ",
+    fromMe: isPrivate,
     desc: "converts video/voice to mp3",
     type: "downloader",
   },
@@ -147,13 +163,13 @@ command(
 
 command(
   {
-    pattern: "yts ?(.*)",
-    fromMe: true,
+    pattern: "yts ",
+    fromMe: isPrivate,
     desc: "Search Youtube",
     type: "Search",
   },
   async (message, match) => {
-    if(!match) return await message.reply('_Enter a search term_')
+    if (!match) return await message.reply("_Enter a search term_");
     let rows = [];
     search(match).then(async ({ videos }) => {
       videos.forEach((result) => {

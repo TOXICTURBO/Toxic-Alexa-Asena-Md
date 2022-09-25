@@ -1,10 +1,11 @@
 const config = require("../config");
-const { command, isAdmin, parsedJid, isUrl } = require("../lib/");
+const { command,isPrivate} = require("../lib/");
+const { isAdmin, parsedJid, isUrl } = require("../lib/functions");
 
 command(
   {
-    pattern: "add ?(.*)",
-    fromMe: true,
+    pattern: "add ",
+    fromMe: isPrivate,
     desc: "Adds a person to group",
     type: "type",
   },
@@ -24,8 +25,8 @@ command(
 
 command(
   {
-    pattern: "kick ?(.*)",
-    fromMe: true,
+    pattern: "kick ",
+    fromMe: isPrivate,
     desc: "description",
     type: "type",
   },
@@ -45,8 +46,8 @@ command(
 
 command(
   {
-    pattern: "promote ?(.*)",
-    fromMe: true,
+    pattern: "promote ",
+    fromMe: isPrivate,
     desc: "description",
     type: "type",
   },
@@ -65,8 +66,8 @@ command(
 );
 command(
   {
-    pattern: "demote ?(.*)",
-    fromMe: true,
+    pattern: "demote ",
+    fromMe: isPrivate,
     desc: "description",
     type: "type",
   },
@@ -90,6 +91,7 @@ command(
 command(
   {
     on: "text",
+    fromMe : false
   },
   async (message, match) => {
     if (!message.isGroup) return;

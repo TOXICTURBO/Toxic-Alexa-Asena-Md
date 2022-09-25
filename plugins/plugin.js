@@ -1,16 +1,8 @@
-/*Codded by @TURBOHYPER
-Whatsapp: wa.me/+916380260672 
-Instagram: toxic_turbo777
-Thanks:
-*İdea by @TURBOHYPER
-copy with credits
-*/
-
-
-const { command, getUrl } = require("../lib");
+const { command } = require("../lib");
 const got = require("got");
 const fs = require("fs");
 const { PluginDB, installPlugin } = require("../lib/database/plugins");
+const { getUrl } = require("../lib/functions");
 
 command(
   {
@@ -38,7 +30,7 @@ command(
     var response = await got(url);
     if (response.statusCode == 200) {
       var commands = response.body
-        .match(/(?<=pattern:)(.*)(?=\?(.*))/g)
+        .match(/(?<=pattern:)(.*)(?=\)/g)
         .map((a) => a.trim().replace(/"|'|`/, ""));
       plugin_name =
         commands[0] ||
@@ -63,7 +55,7 @@ command(
 );
 
 command(
-  { pattern: "plugin", fromMe: true, desc: "plugin list" },
+  { pattern: "plugin ?(.*)", fromMe: true, desc: "plugin list" },
   async (message, match) => {
     var mesaj = "";
     var plugins = await PluginDB.findAll();
