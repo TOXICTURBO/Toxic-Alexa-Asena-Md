@@ -48,7 +48,7 @@ async function Turbo() {
     }
 
     if (connection === "open") {
-      conn.sendMessage(conn.user.id, { text: "connected ✔✔" });
+      conn.sendMessage(conn.user.id, { text: "Toxic Alexa V4 Is Connected To Your Whatsapp ✔✔" });
       console.log("✅ Login Successful!");
       console.log("⬇️ Installing External Plugins...");
 
