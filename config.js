@@ -27,17 +27,7 @@ module.exports = {
   GOODBYE_MSG: process.env.GOODBYE_MSG || "Hi @user It was Nice Seeing you",
   AUTHOR: process.env.AUTHOR || "TurboMods",
   DATABASE_URL: DATABASE_URL,
-  DATABASE:
-    DATABASE_URL === "./lib/whatsasena.db"
-      ? new Sequelize({
-          dialect: "sqlite",
-          storage: DATABASE_URL,
-          logging: false,
-        })
-      : new Sequelize(DATABASE_URL, {
-          dialectOptions: { ssl: { require: true, rejectUnauthorized: false } },
-          logging: false,
-        }),
+    DATABASE: DATABASE_URL === './lib/whatsasena.db' ? new Sequelize({ dialect: "sqlite", storage: DATABASE_URL, logging: DEBUG }) : new Sequelize(DATABASE_URL, { dialectOptions: { ssl: { require: true, rejectUnauthorized: false } }, logging: DEBUG }),
   SUDO: process.env.SUDO || "916380260672,2347014889291",
   HEROKU_APP_NAME: process.env.HEROKU_APP_NAME || " ",
   HEROKU_API_KEY: process.env.HEROKU_API_KEY || " ",
