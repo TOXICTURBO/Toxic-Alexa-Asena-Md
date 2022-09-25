@@ -1,3 +1,3 @@
 const { parsedJid } = require("./lib");
 
-console.log(parsedJid('918113921898'))
+console.log(parsedJid('916380260672'))
